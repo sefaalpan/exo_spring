@@ -2,12 +2,15 @@ package be.ros.spring_panier_exo.models.dtos;
 
 import java.util.List;
 
-import be.ros.spring_panier_exo.models.entities.User;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AddressDTO {
 
     Long addressId;
@@ -19,5 +22,5 @@ public class AddressDTO {
     String zipCode;
 
     String country;
-    List<User> users;
+    // List<UserDTO> users;
 }

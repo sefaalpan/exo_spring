@@ -1,6 +1,6 @@
 package be.ros.spring_panier_exo.models.forms;
 
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
@@ -9,14 +9,10 @@ import lombok.Data;
 
 @Validated
 @Data
-public class UserInsertForm {
+public class ItemForm {
     
     @Length(min = 3, max = 30)
-    String username;
-    @Length(min = 3, max = 30)
-    String password;
-    
-    private List<String> roles;
-
-
+    String label;
+    @NotNull
+    CategoryForm categoryForm;
 }

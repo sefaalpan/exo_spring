@@ -12,8 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.action.internal.OrphanRemovalAction;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -60,6 +62,12 @@ public class User {
     @ManyToOne
     @JoinColumn(name="addressId")
     Address address;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    List<UserItemsEmbeddableWay> userItems;
+
+
 
     // @Override
     // public Collection<? extends GrantedAuthority> getAuthorities() {

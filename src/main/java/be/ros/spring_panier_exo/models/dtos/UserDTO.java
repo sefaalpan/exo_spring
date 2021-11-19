@@ -17,6 +17,7 @@ public class UserDTO {
     boolean accountNonLocked;
     boolean credentialsNonExpired;
     boolean enabled;
+    AddressDTO addressDTO;
 
 
 }

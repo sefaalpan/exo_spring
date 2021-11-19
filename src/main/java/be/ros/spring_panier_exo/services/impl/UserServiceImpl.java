@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import be.ros.spring_panier_exo.mappers.UserMapper;
 import be.ros.spring_panier_exo.models.dtos.UserDTO;
 import be.ros.spring_panier_exo.models.entities.User;
-import be.ros.spring_panier_exo.models.forms.UserInsertForm;
+import be.ros.spring_panier_exo.models.forms.UserForm;
 import be.ros.spring_panier_exo.repositories.UserRepository;
 import be.ros.spring_panier_exo.services.BaseService;
 
 
 @Service
-public class UserServiceImpl implements BaseService<UserDTO, UserInsertForm, Long> {
+public class UserServiceImpl implements BaseService<UserDTO, UserForm, Long> {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -46,13 +46,13 @@ public class UserServiceImpl implements BaseService<UserDTO, UserInsertForm, Lon
     }
 
     @Override
-    public UserDTO save(UserInsertForm tform) {
+    public UserDTO save(UserForm tform) {
         return this.userMapper.entityToDto(
             this.userRepository.save(this.userMapper.formToEntity(tform)));
     }
 
     @Override
-    public UserDTO update(UserInsertForm tform, Long id) {
+    public UserDTO update(UserForm tform, Long id) {
         
         User user = this.userRepository.findById(id).orElse(null);
 

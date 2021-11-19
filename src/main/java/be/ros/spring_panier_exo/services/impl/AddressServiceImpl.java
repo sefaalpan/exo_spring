@@ -25,8 +25,10 @@ public class AddressServiceImpl implements BaseService<AddressDTO, AddressForm, 
 
     @Override
     public List<AddressDTO> getAll() {
-        return this.addressRepository.findAll().stream().map(this.addressMapper::entityToDto)
-                .collect(Collectors.toList());
+        return this.addressRepository.findAll()
+        .stream()
+        .map(this.addressMapper::entityToDto)
+        .collect(Collectors.toList());
 
     }
 

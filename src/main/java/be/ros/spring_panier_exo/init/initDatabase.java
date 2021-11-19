@@ -7,21 +7,23 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 import be.ros.spring_panier_exo.models.entities.Address;
+import be.ros.spring_panier_exo.models.entities.Category;
+import be.ros.spring_panier_exo.models.entities.Item;
 import be.ros.spring_panier_exo.models.entities.User;
 import be.ros.spring_panier_exo.repositories.AddressRepository;
-import be.ros.spring_panier_exo.repositories.UserRepository;
+import be.ros.spring_panier_exo.repositories.CategoryRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
 public class initDatabase implements InitializingBean {
 
-    private final UserRepository userRepository;
     private final AddressRepository addressRepository;
+    private final CategoryRepository categoryRepository;
 
-    public initDatabase(UserRepository userRepository, AddressRepository addressRepository) {
-        this.userRepository = userRepository;
+    public initDatabase(AddressRepository addressRepository, CategoryRepository categoryRepository) {
         this.addressRepository = addressRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -54,7 +56,23 @@ public class initDatabase implements InitializingBean {
             
         
         address.setUsers(users);
-        
+
+        Category category = new Category();
+        category.setLabel("sucrerie");
+
+        List<Item> items = Arrays.asList(
+            Item.builder()
+                .label("Chocolat")
+                .category(category)
+                .build(),
+            Item.builder()
+                .label("Bonbon")
+                .category(category)
+                .build()
+        );
+        category.setItems(items);
+        this.categoryRepository.save(category);
+       
         // users.forEach(this.userRepository::save);
         this.addressRepository.save(address);
     }

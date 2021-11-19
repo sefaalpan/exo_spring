@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,33 +23,26 @@ import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Address {
-
+public class Item {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long addressId;
+    Long itemId;
 
     @Column(nullable = false)
-    String street;
-    
-    @Column(nullable = false)
-    String city;
-    
-    @Column(nullable = false)
-    String zipCode;
-    
-    @Column(nullable = false)
-    String country;
+    String label;
 
-    @Column(nullable = false)
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL,
-                fetch = FetchType.LAZY)
-    List<User> users;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    Category category;
 
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "itemId")
+    List<UserItemsEmbeddableWay> userItems;
 
 }

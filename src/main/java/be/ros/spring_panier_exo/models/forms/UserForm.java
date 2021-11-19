@@ -5,25 +5,23 @@ import java.util.List;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
-import be.ros.spring_panier_exo.models.entities.User;
 import lombok.Data;
 
-@Data
 @Validated
-public class AddressForm {
-
+@Data
+public class UserForm {
+    
     @Length(min = 3, max = 30)
-    String street;
-
+    String username;
+    
     @Length(min = 3, max = 30)
-    String city;
-
+    String password;
+    
     @Length(min = 3, max = 30)
-    String zipCode;
+    String email;
 
-    @Length(min = 3, max = 30)
-    String country;
+    
+    private List<String> roles;
 
-    List<User> users;
 
 }

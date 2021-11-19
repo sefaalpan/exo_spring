@@ -21,33 +21,21 @@ import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table
+@Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class Address {
-
+public class Category {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long addressId;
+    Long categoryId;
 
     @Column(nullable = false)
-    String street;
-    
-    @Column(nullable = false)
-    String city;
-    
-    @Column(nullable = false)
-    String zipCode;
-    
-    @Column(nullable = false)
-    String country;
+    String label;
 
-    @Column(nullable = false)
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL,
-                fetch = FetchType.LAZY)
-    List<User> users;
-
-
+    @OneToMany(targetEntity = Item.class, mappedBy = "category",
+     cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    List<Item> items;
 }
